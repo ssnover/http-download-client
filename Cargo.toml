@@ -5,3 +5,4 @@ authors = ["ssnover95 <sws7379@rit.edu>"]
 edition = "2018"
 
 [dependencies]
+getopts = "0.2"
