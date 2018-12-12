@@ -26,6 +26,30 @@ fn main() {
         None => { print_usage(&program, opts); return; }
     };
 
+    let url_split = url.split("/");
+    let url_pieces: Vec<&str> = url_split.collect();
+    let hostname = url_pieces[0].clone();
+
+    let mut resource_string: String = "".to_owned();
+    let mut i = 0;
+    for s in url_pieces {
+        if i != 0 {
+            resource_string.push_str("/");
+            resource_string.push_str(s);
+        }
+        i += 1;
+    }
+
+    let mut request: String = "GET ".to_owned();
+    request.push_str(&resource_string);
+    request.push_str(" HTTP/1.1\r\n");
+    request.push_str("Host: ");
+    request.push_str(&hostname);
+    request.push_str("\r\n\r\n");
+
     println!("Port: {}", port);
     println!("URL: {}", url);
+    println!("Hostname: {}", hostname);
+    println!("Resource: {}", resource_string);
+    println!("HTTP Request: \n{}", request);
 }
